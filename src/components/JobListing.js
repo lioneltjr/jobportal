@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import {  Button, Table } from 'react-bootstrap';
+import { Button, Table, Card } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './css/joblisting.css';
@@ -12,7 +12,7 @@ export default function JobListing(props) {
 
     //function to get all the job listings in the database
     useEffect(() => {
-        axios.get('http://localhost:8080/jobs').then(res => {
+        axios.get('http://localhost:8080/jobs/status/NotCompleted').then(res => {
             console.log(res.data);
             setJobs(res.data);
         }).catch(error => {
@@ -25,7 +25,30 @@ export default function JobListing(props) {
 
 
     return <Fragment>
-        <Table striped hover bordered>
+        <div id="mylistingpage">
+        {jobs.map(data => {
+            return <Card id="myjoblistingcard" style={{ width: '30em'}}>
+                <Card.Img variant="top" src="https://images.indianexpress.com/2020/03/dog-1-2.jpg" />
+                <Card.Body>
+
+                    <div>
+                        <Card.Title>{data.name}</Card.Title>
+                        <footer className="blockquote-footer">
+                            Posted by <cite title="test">{data.postedBy}</cite>
+                        </footer>
+                        <Card.Body>
+                        </Card.Body>
+                        <Route render={({ history }) => (
+                            <Button variant="secondary" id="myviewmorebtn" type='button' onClick={() => { history.push('/jobs/' + data.id, { id: data.id }) }}> View
+                            </Button>
+                        )} />
+                    </div>
+                
+            </Card.Body>
+            </Card>
+            })}
+            </div>
+            {/* <Table striped hover bordered>
             <thead>
                 <tr>
                     <th>Job Name</th>
@@ -55,11 +78,11 @@ export default function JobListing(props) {
                     )} /></td>
                 </tr></tbody>
             })}
-        </Table>
+        </Table> */}
     </Fragment>
 
 
-{/* <Table striped hover bordered>
+    {/* <Table striped hover bordered>
             <thead>
                 <tr>
                     <th>Job Name</th>

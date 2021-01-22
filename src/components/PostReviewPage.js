@@ -35,12 +35,17 @@ export default class PostReviewPage extends Component{
         e.preventDefault();
         console.log(this.state.description)
         axios.post('http://localhost:8080/review/',{
-            
-                description:this.state.description,
-                rating:this.state.rating,
-                reviewName: this.state.reviewName,
-                posterId: this.state.data.postedBy,
-                seekerId: this.state.data.acceptedBy
+
+                name: this.name,
+                description:this.description,
+                date:this.date,
+                price:this.price,
+                address:this.address,
+                status:this.status,
+                postedBy:this.postedBy,
+                posterId:this.posterId,
+                seekerId:this.seekerId,
+                acceptedBy:this.acceptedBy,
             }).then(res => {
             console.log(res.status);
             alert(JSON.stringify(res.data))
@@ -56,7 +61,8 @@ export default class PostReviewPage extends Component{
         return(
             <Fragment>
                 {data.map(data=> { 
-                return <div>address:{data.address}<br/>
+                return <div>
+                {/* address:{data.address}<br/>
                 name:{data.name}<br/>
                 price:{data.price}<br/>
                 date:{data.date}<br/>
@@ -65,7 +71,8 @@ export default class PostReviewPage extends Component{
                 id: {data.id}<br/>
                 address: {data.address}<br/>
                 status: {data.status}<br/>
-                
+                acceptedBy: {data.acceptedBy}
+                 */}
                 <Card id="Review">
                     <Card.Body>
                         <h1 id="logo">
