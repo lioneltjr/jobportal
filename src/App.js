@@ -7,12 +7,14 @@ import IndividualJobPage from './components/individualjobpage/IndividualJobPage'
 import PostReviewPage from './components/PostReviewPage';
 import Login from './components/Login';
 import UserProfile from './components/UserProfile';
+import Register from './components/Register';
 function App() {
   return (
     <Fragment>
        <Router>
                 <Switch>
                     <Route exact path="/" component={Login}/>
+                    <Route exact path="/register" component={Register}/>
                     <Route exact path="/profile" component={UserProfile}/>
                     <Route exact path="/home" component={Home} />
                     <Route exact path="/jobs/:id" component={IndividualJobPage} />

@@ -55,7 +55,7 @@ function Login ()
                     onChange={(event) => setPassword(event.target.value)}
                   />
                 </Form.Group>
-                <Form.Label>Don't have an account?</Form.Label><Link to='/signup'> Register</Link> <br></br>
+                <Form.Label>Don't have an account?</Form.Label><Link to='/register'> Register</Link> <br></br>
                 <Button variant="primary" type="submit" className="m-5" onClick={(event) => login(event)}>
                   Submit
                 </Button>
