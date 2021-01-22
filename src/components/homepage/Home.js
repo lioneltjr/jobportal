@@ -3,8 +3,10 @@ import React, { Fragment } from 'react'
 import JobListing from '../JobListing';
 export default class Home extends Component{
     render(){
-        return <Fragment>
+        return <Fragment> 
             <JobListing/>
         </Fragment>
+
+        // This is Home.js
     }
 }
