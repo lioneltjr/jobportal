@@ -8,6 +8,7 @@ import PostReviewPage from './components/PostReviewPage';
 import Login from './components/Login';
 import UserProfile from './components/UserProfile';
 import Postjob from './components/Postjob';
+import Register from './Register';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
        <Router>
                 <Switch>
                 <Route exact path="/postjob" component={Postjob}/>
+                <Route exact path="/register" component={Register}/>
                     <Route exact path="/" component={Login}/>
                     <Route exact path="/profile" component={UserProfile}/>
                     <Route exact path="/home" component={Home} />
