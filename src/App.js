@@ -7,11 +7,15 @@ import IndividualJobPage from './components/individualjobpage/IndividualJobPage'
 import PostReviewPage from './components/PostReviewPage';
 import Login from './components/Login';
 import UserProfile from './components/UserProfile';
+import Postjob from './components/Postjob';
+
 function App() {
   return (
     <Fragment>
+      <div className="background">
        <Router>
                 <Switch>
+                <Route exact path="/postjob" component={Postjob}/>
                     <Route exact path="/" component={Login}/>
                     <Route exact path="/profile" component={UserProfile}/>
                     <Route exact path="/home" component={Home} />
@@ -19,7 +23,9 @@ function App() {
                     <Route exact path="/review/:id" component={PostReviewPage} />
                 </Switch>
             </Router>
+            </div>
     </Fragment>
+    
   );
 }
 

@@ -1,0 +1,13 @@
+#myHomepageContainer{
+    padding: 3em;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+#myJobListingContainer{
+    padding: 3em;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+#myChatBtn{
+    float:right;
+}
