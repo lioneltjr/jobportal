@@ -7,7 +7,7 @@ import PlacesAutocomplete, {
     getLatLng,
 } from 'react-places-autocomplete';
 function Register() {
-    // google maps API key = AIzaSyBaiJDhxI-cRJOxyXvcKm4Fcxq-lZxSGzI
+   
     const [userName, setUsername] = useState("");
     const [pass, setPass] = useState("");
     const [age, setAge] = useState("");
