@@ -1,9 +1,8 @@
 import React, { Fragment } from 'react'
-import {  Button, Table } from 'react-bootstrap';
+import { Button, Table, Card } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './css/joblisting.css';
-import IndividualJobPage from './individualjobpage/IndividualJobPage';
 import { Route } from 'react-router-dom'
 
 export default function JobListing(props) {
@@ -26,7 +25,30 @@ export default function JobListing(props) {
 
 
     return <Fragment>
-        <Table>
+        <div id="mylistingpage">
+        {jobs.map(data => {
+            return <Card id="myjoblistingcard" style={{ width: '30em'}}>
+                <Card.Img variant="top" src="https://images.indianexpress.com/2020/03/dog-1-2.jpg" />
+                <Card.Body>
+
+                    <div>
+                        <Card.Title>{data.name}</Card.Title>
+                        <footer className="blockquote-footer">
+                            Posted by <cite title="test">{data.postedBy}</cite>
+                        </footer>
+                        <Card.Body>
+                        </Card.Body>
+                        <Route render={({ history }) => (
+                            <Button variant="secondary" id="myviewmorebtn" type='button' onClick={() => { history.push('/jobs/' + data.id, { id: data.id }) }}> View
+                            </Button>
+                        )} />
+                    </div>
+                
+            </Card.Body>
+            </Card>
+            })}
+            </div>
+            {/* <Table striped hover bordered>
             <thead>
                 <tr>
                     <th>Job Name</th>
@@ -37,7 +59,7 @@ export default function JobListing(props) {
                 </tr>
             </thead>
             {jobs.map(jobs => {
-                return <tr>
+                return <tbody><tr>
                     <td>{jobs.name}</td>
                     <td>{jobs.postedBy}</td>
                     <td>{jobs.price}</td>
@@ -54,10 +76,43 @@ export default function JobListing(props) {
                             Apply
                         </Button>
                     )} /></td>
-                </tr>
+                </tr></tbody>
             })}
-        </Table>
+        </Table> */}
     </Fragment>
+
+
+    {/* <Table striped hover bordered>
+            <thead>
+                <tr>
+                    <th>Job Name</th>
+                    <th>Posted By</th>
+                    <th>Reward</th>
+                    <th>Chat</th>
+                    <th>Apply</th>
+                </tr>
+            </thead>
+            {jobs.map(jobs => {
+                return <tbody><tr>
+                    <td>{jobs.name}</td>
+                    <td>{jobs.postedBy}</td>
+                    <td>{jobs.price}</td>
+                    <td><Button>Chat</Button></td>
+                    <td><Route render={({ history }) => (
+                        <Button
+                            type='button'
+                            onClick={() => {
+                                history.push('/jobs/' + jobs.id, {
+                                    id: jobs.id,
+                                })
+                            }}
+                        >
+                            Apply
+                        </Button>
+                    )} /></td>
+                </tr></tbody>
+            })}
+        </Table> */}
 
 
 }

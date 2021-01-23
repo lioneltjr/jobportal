@@ -24,6 +24,7 @@
   color: white;
 }
 
+
 .App-link {
   color: #61dafb;
 }
@@ -37,3 +38,18 @@
   }
 }
 
+.navbar-brand{
+  padding-left:15%; 
+}
+#logoutbtn{
+  padding-right:15%;
+ 
+}
+.background {
+  background-image: url('./components/css/sitebg.jpg');
+  position: fixed;
+top: 0;
+width: 100%;
+height: 100%;
+background-size: cover;
+}

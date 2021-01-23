@@ -27,7 +27,7 @@ function Postjob()
   //This is how we created the createBooks function!
   const createJobs = (event) => {
     event.preventDefault();
-    if (localStorage.getItem("token"))  {
+    // if (localStorage.getItem("token"))  {
     console.log(event);
     console.log("Name", name);
     console.log("description", description);
@@ -36,8 +36,7 @@ function Postjob()
     console.log("address", address);
  
 
-        axios
-          .post("http://localhost:8080/jobs", {
+        axios.post("http://localhost:8080/jobs", {
            name: name,
            description: description,
            date: date,
@@ -52,7 +51,7 @@ function Postjob()
             alert(JSON.stringify(res.data));
           })
           .catch((err) => console.log(err));
-      }
+      //}
     }
     
 
