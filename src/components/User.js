@@ -15,7 +15,7 @@ const User = () => {
     loadUser();
   }, []);
   const loadUser = async () => {
-    const res = await axios.get(`http://localhost:8080/jobs/${id}`);
+    const res = await axios.get(`a36cdfde5edb54fc1be39fc625215c59-327723398.ap-southeast-1.elb.amazonaws.com:8080/jobs/${id}`);
     setUser(res.data);
   };
   return (

@@ -18,7 +18,7 @@ function Register()
   useEffect(() => {
 
     axios
-      .get("http://localhost:8080/user")
+      .get("a36cdfde5edb54fc1be39fc625215c59-327723398.ap-southeast-1.elb.amazonaws.com:8080/user")
       .then((res) => {
         setUser(res.data);
       })
@@ -30,7 +30,7 @@ function Register()
     event.preventDefault();
 
         axios
-          .post("http://localhost:8080/user", {
+          .post("a36cdfde5edb54fc1be39fc625215c59-327723398.ap-southeast-1.elb.amazonaws.com:8080/user", {
             userName: userName,
             pass: pass,
             age: age,

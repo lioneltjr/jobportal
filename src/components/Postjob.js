@@ -17,7 +17,7 @@ function Postjob()
   useEffect(() => {
 
     axios
-      .get("http://localhost:8080/jobs")
+      .get("a36cdfde5edb54fc1be39fc625215c59-327723398.ap-southeast-1.elb.amazonaws.com:8080/jobs")
       .then((res) => {
         setJobs(res.data);
       })
@@ -36,13 +36,13 @@ function Postjob()
     console.log("address", address);
  
 
-        axios.post("http://localhost:8080/jobs", {
+        axios.post("a36cdfde5edb54fc1be39fc625215c59-327723398.ap-southeast-1.elb.amazonaws.com:8080/jobs", {
            name: name,
            description: description,
            date: date,
            price: price,
            address: address,
-          
+           status: "NotCompleted"
           }
           )
           .then((res) => {

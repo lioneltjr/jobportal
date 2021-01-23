@@ -17,3 +17,6 @@
 #myviewmorebtn{
     width: 100%;
 }
+.leaflet-container {
+height: 200px;
+}

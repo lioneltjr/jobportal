@@ -13,7 +13,7 @@ export default class IndividualJobPage extends Component {
     }
     componentDidMount() {
 
-        axios.get('http://localhost:8080/jobs/' + this.props.match.params.id)
+        axios.get('a36cdfde5edb54fc1be39fc625215c59-327723398.ap-southeast-1.elb.amazonaws.com:8080/jobs/' + this.props.match.params.id)
 
             .then(response => {
                 console.log(response)
@@ -31,7 +31,7 @@ export default class IndividualJobPage extends Component {
     render() {
         const { data } = this.state
         function applyJob(data) {
-            axios.put('http://localhost:8080/jobs/' + data.id, {
+            axios.put('a36cdfde5edb54fc1be39fc625215c59-327723398.ap-southeast-1.elb.amazonaws.com:8080/jobs/' + data.id, {
                 "status": "Pending",
                 "name": data.name,
                 "address": data.address,
@@ -52,7 +52,7 @@ export default class IndividualJobPage extends Component {
             });
         }
         function cancelJob(data) {
-            axios.put('http://localhost:8080/jobs/' + data.id, {
+            axios.put('a36cdfde5edb54fc1be39fc625215c59-327723398.ap-southeast-1.elb.amazonaws.com:8080/jobs/' + data.id, {
                 "status": "Not Completed",
                 "name": data.name,
                 "address": data.address,
@@ -73,7 +73,7 @@ export default class IndividualJobPage extends Component {
             });
         }
         function completeJob(data) {
-            axios.put('http://localhost:8080/jobs/' + data.id, {
+            axios.put('a36cdfde5edb54fc1be39fc625215c59-327723398.ap-southeast-1.elb.amazonaws.com:8080/jobs/' + data.id, {
                 "status": "Completed",
                 "name": data.name,
                 "address": data.address,
