@@ -30,7 +30,7 @@ const onInputChange = e => {
   {
     console.log("welcome");
     e.preventDefault()
-        axios.put(`a36cdfde5edb54fc1be39fc625215c59-327723398.ap-southeast-1.elb.amazonaws.com:8080/jobs/` +id ,user)
+        axios.put(`http://ac060b74cd1704a4d8f21dbe32279459-1851138779.ap-southeast-1.elb.amazonaws.com:8080/jobs/` +id ,user)
         .then(res => {
             window.location.reload(false);
             console.log(res.data);
@@ -45,7 +45,7 @@ const onInputChange = e => {
 
     const loadUser = async() =>
     {
-        const result = await axios.get(`a36cdfde5edb54fc1be39fc625215c59-327723398.ap-southeast-1.elb.amazonaws.com:8080/jobs/${id}`)
+        const result = await axios.get(`http://ac060b74cd1704a4d8f21dbe32279459-1851138779.ap-southeast-1.elb.amazonaws.com:8080/jobs/${id}`)
         setUser(result.data)
     }
     

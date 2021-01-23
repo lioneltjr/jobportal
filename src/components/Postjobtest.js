@@ -54,7 +54,7 @@ function Postjobtest() {
     console.log("address", address);
 
 
-    axios.post("a36cdfde5edb54fc1be39fc625215c59-327723398.ap-southeast-1.elb.amazonaws.com:8080/jobs", {
+    axios.post("http://ac060b74cd1704a4d8f21dbe32279459-1851138779.ap-southeast-1.elb.amazonaws.com:8080/jobs", {
       name: name,
       description: description,
       date: date,
