@@ -19,6 +19,8 @@ function App() {
                     <Route exact path="/home" component={Home} />
                     <Route exact path="/jobs/:id" component={IndividualJobPage} />
                     <Route exact path="/review/:id" component={PostReviewPage} />
+                    <Route exact path="/edit/:id" component={Edit} />
+                    <Route exact path="/:id" component={User} />
                 </Switch>
             </Router>
     </Fragment>

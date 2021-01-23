@@ -1,20 +1,17 @@
-import { Button, Card, Form, Table, Tabs } from 'react-bootstrap';
+import {Table, Tabs } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
 import { useEffect, useState } from 'react';
 import {  Tab } from 'bootstrap';
 import 'reactjs-popup/dist/index.css';
 import { Link } from 'react-router-dom';
+
+
 function UserProfile()
 {
-    const [id, setId] = useState('');
+   
   const [Jobs, setJobs] = useState([]);
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [date, setDate] = useState("");
-  const [price, setPrice] = useState("");
-  const [address, setAddress] = useState("");
-  
+  const [Users, setUsers] = useState([]);
   const [update, setUpdate] = useState(true);
 
   useEffect(() => {
@@ -25,30 +22,14 @@ function UserProfile()
 
   }, []);
 
+  useEffect(() => {
+    axios.get('http://localhost:8080/user').then(res => {
+      console.log(res.data);
+      setUsers(res.data);
+    })
 
+  }, []);
 
-
-    const updateJobs = (event) => {
-        event.preventDefault();
-        
-          axios
-            .put("http://localhost:8080/jobs/" + id, 
-            {
-                id:id,
-                name: name,
-                description: description,
-                date: date,
-                price: price,
-                address: address,
-              
-            })
-            .then((res) => {
-                window.location.reload(false);
-                alert(JSON.stringify(res.data));
-            })
-            .catch((err) => console.log(err));
-        }
-     
     
       const deleteJobs = (event) => {
        let element = event.currentTarget;
@@ -69,16 +50,17 @@ function UserProfile()
         }
      
                   
-     
+        
     return(
         
         <Tabs defaultActiveKey="myJobs" id="uncontrolled-tab-example">    
       
           <Tab eventKey="myJobs" Task="My Jobs" title = "Current JobListing">
-            <h1 className="m-5">My Jobs</h1>
-            <div className="mx-5">
-              <Table striped bordered hover variant="outlined-light">
-                <thead>
+            <div className= "container">
+              <div className = "py-4"> 
+              <h1> Jobs </h1>
+              <Table class = "table border shadow">
+                <thead class = "thead-dark ">
                   <tr>
                     <th>Id</th>
                     <th>Task</th>
@@ -86,8 +68,8 @@ function UserProfile()
                     <th>Date</th>
                     <th>Servicecharge</th>
                     <th>Address</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Action</th>
+                    
                   </tr>
                 </thead>
                 <tbody>
@@ -102,102 +84,55 @@ function UserProfile()
                             <td>{element.price}</td>
                             <td>{element.address}</td>
                             <td>
-                              <Button
-                                variant="outline-warning"
-                                // onClick={ } 
-                              >
-                                Edit
-                              </Button>
-                            </td>
-                            <td>
-                              <Button
-                                variant="outline-danger" id = {element.id}
-                                onClick={(event) => deleteJobs(event)}
-                              >
-                                Delete
-                              </Button>
+                              <Link class="btn btn-primary mr-2"  to={`/${element.id}`}>View</Link>
+                              <Link class="btn btn-outline-primary mr-2" to = {`/edit/${element.id}`}>Edit</Link>
+                              <Link class="btn btn-danger" id = {element.id}
+                                onClick={(event) => deleteJobs(event)}>Delete</Link>
+                              
                             </td>
                           </tr>
-                        
                       }
                     )}
                 </tbody>
               </Table>
             </div>
-          </Tab>
-         
-          <Tab
-            eventKey="editjob" title = "Edit job">
-            <h1 className="m-5">Edit Job information</h1>
-            <div className="form-popup" id={"myForm"}>
-            {/* <div className="mx-5"> */}
-            <Card className="bg-light mx-auto" style={{ width: "30rem" }}>
-              <Card.Header>Edit Job information</Card.Header>
-        
-              <Form
-                className="m-3"
-              >
-                  <Form.Group controlId="Task">
-                  <Form.Label>Id</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={id}
-                    onChange={(event) => setId(event.target.value)}
-                  />
-                </Form.Group>
-                <Form.Group controlId="Task">
-                  <Form.Label>Task</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={name}
-                    onChange={(event) => setName(event.target.value)}
-                  />
-                </Form.Group>
-
-                <Form.Group controlId="Desc">
-                  <Form.Label>Description</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={description}
-                    onChange={(event) => setDescription(event.target.value)}
-                  />
-                </Form.Group>
-
-                <Form.Group controlId="Date">
-                  <Form.Label>Date</Form.Label>
-                  <Form.Control
-                    type="date"
-                    value={date}
-                    onChange={(event) => setDate(event.target.value)}
-                  />
-                </Form.Group>
-
-                <Form.Group controlId="Servicecharge">
-                  <Form.Label>Servicecharge</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={price}
-                    onChange={(event) => setPrice(event.target.value)}
-                  />
-                </Form.Group> 
-                <Form.Group controlId="Address">
-                  <Form.Label>Address</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={address}
-                    onChange={(event) => setAddress(event.target.value)}
-                  />
-                </Form.Group>
-
-                <Button variant="primary" type="submit" onClick={(event) => updateJobs(event)}>
-                  Update
-                </Button>
-              </Form>
-            </Card>
             </div>
           </Tab>
-      
+
+          <Tab   eventKey="user" Task="My user"title = "User Profile">
+          <Table striped bordered hover variant="outlined-light">
+                <thead>
+                  <tr>
+                    <th>User Id</th>
+                    <th>User Name</th>
+                    <th>Age</th>
+                    <th>Phone number</th>
+                    <th>Email</th>
+                    <th>Average rating</th>
+                  </tr>
+                </thead>
+                <tbody>
+            {
+                    Users.map((element) => {
+                   
+                        return  <tr key={element.userId} id = {element.UserId}> 
+                            <td>{element.userId}</td>
+                            <td>{element.userName}</td>
+                            <td>{element.age}</td>
+                            <td>{element.phoneNumber}</td>
+                            <td>{element.email}</td>
+                            <td>{element.averageRating}</td>
+                            </tr>
+                      }
+
+                      )}
+                      </tbody>
+
+                    </Table>
+          </Tab>
       </Tabs>
     )
+
+  
 }
 export default UserProfile;

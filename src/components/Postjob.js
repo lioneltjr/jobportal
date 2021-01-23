@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Tabs, Tab,  Form, Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 function Postjob() 
 {
 
@@ -46,7 +47,9 @@ function Postjob()
           }
           )
           .then((res) => {
+            window.location.reload(false);
             console.log(res.data);
+            alert(JSON.stringify(res.data));
           })
           .catch((err) => console.log(err));
       }
@@ -56,17 +59,18 @@ function Postjob()
 
     return(
     
-            <div className="App mt-5">
            
-              <Tabs defaultActiveKey="addjobs" id="uncontrolled-tab-example">
-               
-             
-                  <Tab eventKey="addjobs" name="Add Jobs">
-                    <h1 className="m-5">Add Jobs</h1>
-        
+            
+                  <div className="container">
+                      <Link className="btn btn-primary" to="/profile">
+        back to Home
+      </Link>
+                  <div className="w-75 mx-auto shadow p-5"> 
                  
-                    <Card className="bg-light mx-auto" style={{ width: "30rem" }}>
-                      <Card.Header>Add Jobs</Card.Header>
+                  <Card className="text-center">
+                      <Card.Header>
+                     Add Jobs </Card.Header>
+                     </Card>
         
                    
                       <Form onSubmit={(event) => createJobs(event)} className="m-3">
@@ -124,20 +128,18 @@ function Postjob()
                             
                           </Form.Control>
                         </Form.Group>
-                        
-                        <Button variant="primary" type="submit">
+                      
+                        <Button className = "btn btn-primary btn-block" type="submit">
                           Add
                         </Button>
                       </Form>
-                    </Card>
-                  </Tab>
-             
-        
-              
+                  
+                    </div>
+                    </div>
                
-              </Tabs>
-            </div>
     )
 }
+
+
 
 export default Postjob;
