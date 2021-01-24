@@ -4,6 +4,8 @@ import { Button, Card } from 'react-bootstrap';
 import { Route } from 'react-router-dom';
 import Navigation from '../Navigation';
 import '../css/home.css';
+
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 export default class IndividualJobPage extends Component {
     constructor(props) {
         super(props);
@@ -13,7 +15,7 @@ export default class IndividualJobPage extends Component {
     }
     componentDidMount() {
 
-        axios.get('http://ac060b74cd1704a4d8f21dbe32279459-1851138779.ap-southeast-1.elb.amazonaws.com:8080/jobs/' + this.props.match.params.id)
+        axios.get('http://a79008e6b1ffe4361a245eca16098189-1420962472.ap-southeast-1.elb.amazonaws.com:8080/jobs/' + this.props.match.params.id)
 
             .then(response => {
                 console.log(response)
@@ -31,7 +33,7 @@ export default class IndividualJobPage extends Component {
     render() {
         const { data } = this.state
         function applyJob(data) {
-            axios.put('http://ac060b74cd1704a4d8f21dbe32279459-1851138779.ap-southeast-1.elb.amazonaws.com:8080/jobs/' + data.id, {
+            axios.put('http://a79008e6b1ffe4361a245eca16098189-1420962472.ap-southeast-1.elb.amazonaws.com:8080/jobs/' + data.id, {
                 "status": "Pending",
                 "name": data.name,
                 "address": data.address,
@@ -39,6 +41,8 @@ export default class IndividualJobPage extends Component {
                 "date": data.date,
                 "description": data.description,
                 "id": data.id,
+                "lat":data.lat,
+                "lng":data.lng
 
             }).then(res => {
                 console.log(res.data);
@@ -52,14 +56,16 @@ export default class IndividualJobPage extends Component {
             });
         }
         function cancelJob(data) {
-            axios.put('http://ac060b74cd1704a4d8f21dbe32279459-1851138779.ap-southeast-1.elb.amazonaws.com:8080/jobs/' + data.id, {
-                "status": "Not Completed",
+            axios.put('http://a79008e6b1ffe4361a245eca16098189-1420962472.ap-southeast-1.elb.amazonaws.com:8080/jobs/' + data.id, {
+                "status": "NotCompleted",
                 "name": data.name,
                 "address": data.address,
                 "price": data.price,
                 "date": data.date,
                 "description": data.description,
                 "id": data.id,
+                "lat":data.lat,
+                "lng":data.lng
 
             }).then(res => {
                 console.log(res.data);
@@ -73,7 +79,7 @@ export default class IndividualJobPage extends Component {
             });
         }
         function completeJob(data) {
-            axios.put('http://ac060b74cd1704a4d8f21dbe32279459-1851138779.ap-southeast-1.elb.amazonaws.com:8080/jobs/' + data.id, {
+            axios.put('http://a79008e6b1ffe4361a245eca16098189-1420962472.ap-southeast-1.elb.amazonaws.com:8080/jobs/' + data.id, {
                 "status": "Completed",
                 "name": data.name,
                 "address": data.address,
@@ -81,6 +87,8 @@ export default class IndividualJobPage extends Component {
                 "date": data.date,
                 "description": data.description,
                 "id": data.id,
+                "lat":data.lat,
+                "lng":data.lng
 
             }).then(res => {
                 console.log(res.data);
@@ -97,7 +105,6 @@ export default class IndividualJobPage extends Component {
         var showCancel = false;
 
         function isCompletedCheck(data) {
-            console.log("HEREREE IN COMPLETED CHECK")
             if (data.status === "Completed") {
                 showReview = true;
             } else if (data.status === "Pending") {
@@ -108,15 +115,28 @@ export default class IndividualJobPage extends Component {
             }
         }
 
+
         return (
             <Fragment>
                 <Navigation />
                 <div id="myJobListingContainer">
-                    <Card style={{ width: '70em' }}>
-                        <Card.Img variant="top" src="https://images.indianexpress.com/2020/03/dog-1-2.jpg" />
-                        <Card.Body>
-                            {data.map(data => {
-                                return <div>
+                    {data.map(data => {
+                        return <div>
+                            <Card style={{ width: '70em' }}>
+                                {/* <Card.Img variant="top" src="https://images.indianexpress.com/2020/03/dog-1-2.jpg" /> */}
+                                <MapContainer id="mymapcontainer" center={[51.505, -0.09]} zoom={19} scrollWheelZoom={false}>
+                                    <TileLayer
+                                        attribution='<img src="https://docs.onemap.sg/maps/images/oneMap64-01.png" style="height:20px;width:20px;"/> New OneMap | Map data &copy; contributors, <a href="http://SLA.gov.sg">Singapore Land Authority</a>'
+                                        url={"https://developers.onemap.sg/commonapi/staticmap/getStaticImage?layerchosen=night&lat="+data.lat+"&lng="+data.lng+"&zoom=17&width=512&height=512"}
+                                    />
+                                    <Marker position={[51.505, -0.09]}>
+                                        <Popup>
+                                            {data.address}
+                                        </Popup>
+                                    </Marker>
+                                </MapContainer>
+                                <Card.Body>
+
                                     <Card.Title>{data.name}</Card.Title>
                                     <footer className="blockquote-footer">
                                         Posted by <cite title="test">{data.postedBy}</cite>
@@ -136,10 +156,12 @@ export default class IndividualJobPage extends Component {
                                         </Button>
                                     )} /> : null}
                                     <div id="myChatBtn"><Button>Chat</Button></div>
-                                </div>
-                            })}
+
+                            
                         </Card.Body>
-                    </Card>
+                            </Card>
+                        </div>
+                        })}
                 </div>
 
 

@@ -9,6 +9,7 @@ import PlacesAutocomplete, {
 import Navigation from "./Navigation";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import './css/joblisting.css';
+import {useHistory} from 'react-router-dom';
 
 function Postjobtest() {
 
@@ -24,6 +25,7 @@ function Postjobtest() {
     lat: null,
     lng: null
   });
+  const history = useHistory();
 
   const handleSelect = async value => {
     const results = await geocodeByAddress(value);
@@ -35,7 +37,7 @@ function Postjobtest() {
   useEffect(() => {
 
     axios
-      .get("a86c34b8af1be4fd7a3990c49bb5b98e-1786563949.ap-southeast-1.elb.amazonaws.com:8080/jobs")
+      .get("http://a79008e6b1ffe4361a245eca16098189-1420962472.ap-southeast-1.elb.amazonaws.com:8080/jobs")
       .then((res) => {
         setJobs(res.data);
       })
@@ -52,42 +54,35 @@ function Postjobtest() {
     console.log("date", date);
     console.log("price", price);
     console.log("address", address);
+    console.log("lat", coordinates.lat);
+    console.log("lng", coordinates.lng);
 
 
-    axios.post("http://ac060b74cd1704a4d8f21dbe32279459-1851138779.ap-southeast-1.elb.amazonaws.com:8080/jobs", {
+    axios.post("http://a79008e6b1ffe4361a245eca16098189-1420962472.ap-southeast-1.elb.amazonaws.com:8080/jobs", {
       name: name,
       description: description,
       date: date,
       price: price,
       address: address,
-      status: "NotCompleted"
+      status: "NotCompleted",
+      lat:coordinates.lat,
+      lng:coordinates.lng
     }
     )
       .then((res) => {
-        window.location.reload(false);
+        // window.location.reload(false);
         console.log(res.data);
         alert(JSON.stringify(res.data));
+        history.push("/home") 
       })
       .catch((err) => console.log(err));
     //}
   }
 
 
-
   return (
 
     <Fragment>
-      <MapContainer id="mymapcontainer" center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
-          <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://developers.onemap.sg/commonapi/staticmap/getStaticImage?layerchosen=grey&lat=1.31955&lng=103.84223&zoom=17&height=512&width=512&polygons=&lines=&points=&color=&fillColor="
-          />
-          <Marker position={[51.505, -0.09]}>
-            <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
-            </Popup>
-          </Marker>
-        </MapContainer>
       <Navigation />
 
       <div className="container">
@@ -153,8 +148,8 @@ function Postjobtest() {
               >
                 {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                   <div>
-                    <p>Latitude: {coordinates.lat}</p>
-                    <p>Longitude: {coordinates.lng}</p>
+                    {/* <p>Latitude: {coordinates.lat}</p>
+                    <p>Longitude: {coordinates.lng}</p> */}
                     <Form.Control {...getInputProps({ placeholder: "Type address" })} />
 
                     <div>

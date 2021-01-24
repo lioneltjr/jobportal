@@ -8,14 +8,13 @@ export default function Navigation() {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link href="home">Home</Nav.Link>
-                    <Nav.Link href="postjob">Post a Job</Nav.Link>
+                    <Nav.Link href="http://a46a39a00366d4c55881a8f0cbd7b5fa-1845516511.ap-southeast-1.elb.amazonaws.com:3000/home">Home</Nav.Link>
+                    <Nav.Link href="http://a46a39a00366d4c55881a8f0cbd7b5fa-1845516511.ap-southeast-1.elb.amazonaws.com:3000/postjob">Post a Job</Nav.Link>
                     <NavDropdown title="My Account" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">Job Records</NavDropdown.Item>
+                        <NavDropdown.Item href="http://a46a39a00366d4c55881a8f0cbd7b5fa-1845516511.ap-southeast-1.elb.amazonaws.com:3000/profile">My Profile</NavDropdown.Item>
+                        <NavDropdown.Item href="http://a46a39a00366d4c55881a8f0cbd7b5fa-1845516511.ap-southeast-1.elb.amazonaws.com:3000/update">View My Listings</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.2">Alerts</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.3">Messages</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
                 {/* <Form inline>

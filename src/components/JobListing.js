@@ -12,7 +12,7 @@ export default function JobListing(props) {
 
     //function to get all the job listings in the database
     useEffect(() => {
-        axios.get('http://ac060b74cd1704a4d8f21dbe32279459-1851138779.ap-southeast-1.elb.amazonaws.com:8080/jobs/').then(res => {
+        axios.get('http://a79008e6b1ffe4361a245eca16098189-1420962472.ap-southeast-1.elb.amazonaws.com:8080/jobs/').then(res => {
             console.log(res.data);
             setJobs(res.data);
         }).catch(error => {

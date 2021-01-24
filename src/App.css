@@ -53,3 +53,17 @@ width: 100%;
 height: 100%;
 background-size: cover;
 }
+#test{
+  text-align:center;
+  font-weight:400;
+  font-size: 4em;
+  font-family: Georgia, serif;
+
+}
+#username{
+  font-weight: 500;
+  font-family: Cursive;
+  font-size: 1.5em;
+  float:left;
+
+}
