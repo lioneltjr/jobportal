@@ -1,0 +1,48 @@
+#Code by Madhavan Parthiban
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: spring-boot
+    labels:
+        app: jobstreet
+spec:
+    selector:
+        matchLabels:
+            app: jobstreet
+            role: master
+            tier: backend
+    replicas: 1
+
+    template:
+        metadata:
+            labels:
+                app: jobstreet
+                role: master
+                tier: backend
+        spec:
+            containers:
+                - name: master
+                  image: vaishnavipriya/jobportalfinal:0.0.1-SNAPSHOT
+                  imagePullPolicy: 'Always'
+                  resources:
+                      requests:
+                          cpu: 500m
+                          memory: 500Mi
+                  ports:
+                      - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: spring-boot
+    labels:
+        app: jobstreet
+        role: master
+        tier: backend
+spec:
+    type: LoadBalancer
+    ports:
+        - port: 8080
+    selector:
+        app: jobstreet
+        tier: backend

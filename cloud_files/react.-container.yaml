@@ -1,0 +1,37 @@
+#Code by Madhavan Parthiban
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: myreactapp
+spec:
+    selector:
+        matchLabels:
+            app: myreactapp
+    template:
+        metadata:
+            labels:
+                app: myreactapp
+        spec:
+            containers:
+                - name: myreactapp
+                  image: vaishnavipriya/reactapp:0.2
+                  resources:
+                      limits:
+                          memory: '400Mi'
+                          cpu: '400m'
+                  ports:
+                      - containerPort: 3000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: react
+    labels:
+        app: myreactapp
+spec:
+    type: LoadBalancer
+    ports:
+        - port: 3000
+    selector:
+        app: myreactapp
